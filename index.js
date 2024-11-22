@@ -2,8 +2,6 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
-app.use(cors())
-
 let notes = [
   {
     id: '1',
@@ -32,6 +30,8 @@ const requestLogger = (request, response, next) => {
 
 app.use(express.json())
 app.use(requestLogger)
+app.use(cors())
+app.use(express.static('dist'))
 
 const unknownEndPoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
